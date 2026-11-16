@@ -1,0 +1,381 @@
+[
+  {
+    "id": "cpp-variables",
+    "title": "變數與資料型態",
+    "language": "cpp",
+    "difficulty": "beginner",
+    "category": "basics",
+    "summary": "用 int、double、bool 與 string 儲存資料，認識 C++ 的靜態型別。",
+    "objectives": [
+      "宣告並初始化變數",
+      "選擇合適的基本資料型態",
+      "用 cout 輸出變數"
+    ],
+    "explanation": "C++ 在宣告時指定型別，常見的有 int（整數）、double（浮點數）、bool（布林值）與 std::string（字串）。\n以「型別 名稱 = 初始值;」建立變數。const 表示初始化後不可再指定新值。std::boolalpha 讓布林值輸出為 true 或 false。",
+    "examples": [
+      {
+        "title": "完整可執行範例",
+        "code": "#include <iostream>\n#include <string>\n\nint main() {\n    int age = 20;\n    double score = 95.5;\n    bool learning = true;\n    const std::string name = \"Ada\";\n    std::cout << name << \": \" << age << \"\\n\";\n    std::cout << score << \"\\n\";\n    std::cout << std::boolalpha << learning << \"\\n\";\n    return 0;\n}",
+        "output": "Ada: 20\n95.5\ntrue"
+      }
+    ],
+    "notes": [
+      "使用變數前先初始化，避免讀取未定義值。",
+      "整數除法會捨去小數部分；需要小數時使用浮點運算。",
+      "std::string 需要引入 <string>。"
+    ],
+    "keywords": [
+      "變數",
+      "型別",
+      "int",
+      "double",
+      "bool",
+      "string",
+      "const"
+    ],
+    "related": [
+      "cpp-conditions",
+      "cpp-loops"
+    ]
+  },
+  {
+    "id": "cpp-conditions",
+    "title": "if / else 條件判斷",
+    "language": "cpp",
+    "difficulty": "beginner",
+    "category": "control-flow",
+    "summary": "根據條件選擇不同程式分支，理解比較與邏輯運算。",
+    "objectives": [
+      "撰寫 if、else if 與 else",
+      "分辨 == 與 =",
+      "以比較運算建立條件"
+    ],
+    "explanation": "if (條件) { ... } 會在條件為 true 時執行區塊。else if 依序檢查其他條件，else 處理其餘情況；同一條判斷鏈只執行第一個成立分支。\n比較運算子包含 ==、!=、>=、<=；&& 表示且，|| 表示或。",
+    "examples": [
+      {
+        "title": "完整可執行範例",
+        "code": "#include <iostream>\n\nint main() {\n    int score = 82;\n    if (score >= 90) {\n        std::cout << \"Excellent\\n\";\n    } else if (score >= 60) {\n        std::cout << \"Pass\\n\";\n    } else {\n        std::cout << \"Try again\\n\";\n    }\n    return 0;\n}",
+        "output": "Pass"
+      }
+    ],
+    "notes": [
+      "= 是指定值，== 才是比較相等。",
+      "建議即使只有一行也保留大括號。",
+      "有重疊的條件應先檢查較嚴格者。"
+    ],
+    "keywords": [
+      "if",
+      "else",
+      "條件",
+      "比較",
+      "邏輯"
+    ],
+    "related": [
+      "cpp-variables",
+      "cpp-loops"
+    ]
+  },
+  {
+    "id": "cpp-loops",
+    "title": "for / while 迴圈",
+    "language": "cpp",
+    "difficulty": "beginner",
+    "category": "control-flow",
+    "summary": "重複執行程式區塊，掌握計數、條件更新與迴圈邊界。",
+    "objectives": [
+      "使用 for 控制重複次數",
+      "使用 while 依條件重複",
+      "避免無窮迴圈"
+    ],
+    "explanation": "for (初始值; 條件; 更新) 適合已知次數的重複工作。每次先檢查條件，執行區塊後更新。\nwhile (條件) 適合依狀態持續執行；需在迴圈內更新狀態，使條件最終變為 false。break 可以提早結束，continue 則跳到下一次迭代。",
+    "examples": [
+      {
+        "title": "完整可執行範例",
+        "code": "#include <iostream>\n\nint main() {\n    int total = 0;\n    for (int i = 1; i <= 3; ++i) {\n        total += i;\n    }\n    std::cout << total << \"\\n\";\n    int count = 2;\n    while (count > 0) {\n        std::cout << count << \"\\n\";\n        --count;\n    }\n    return 0;\n}",
+        "output": "6\n2\n1"
+      }
+    ],
+    "notes": [
+      "留意 < 與 <= 的差異，避免多跑或少跑一次。",
+      "while 的狀態若沒有更新，可能形成無窮迴圈。",
+      "不要在 for 後方誤加分號。"
+    ],
+    "keywords": [
+      "for",
+      "while",
+      "迴圈",
+      "break",
+      "continue"
+    ],
+    "related": [
+      "cpp-conditions",
+      "cpp-variables"
+    ]
+  },
+  {
+    "id": "python-variables",
+    "title": "變數與資料型態",
+    "language": "python",
+    "difficulty": "beginner",
+    "category": "basics",
+    "summary": "從整數、浮點數、字串與布林值開始，認識 Python 的動態型別。",
+    "objectives": [
+      "以指定運算建立變數",
+      "認識 int、float、str、bool",
+      "以 f-string 組合文字"
+    ],
+    "explanation": "Python 以「名稱 = 值」將名稱綁定到物件，不需要先寫型別。常用型別包含 int、float、str、bool。\nf-string 在字串前加 f，並以大括號放入變數。True 和 False 的首字母必須大寫。",
+    "examples": [
+      {
+        "title": "完整可執行範例",
+        "code": "name = \"Ada\"\nage = 20\nscore = 95.5\nis_learning = True\n\nprint(f\"{name}: {age}\")\nprint(score)\nprint(is_learning)",
+        "output": "Ada: 20\n95.5\nTrue"
+      }
+    ],
+    "notes": [
+      "變數名稱區分大小寫，建議使用 snake_case。",
+      "input() 回傳字串，數值運算前需轉型。",
+      "/ 是一般除法；// 是向下取整除法。"
+    ],
+    "keywords": [
+      "變數",
+      "int",
+      "float",
+      "str",
+      "bool",
+      "f-string"
+    ],
+    "related": [
+      "python-conditions",
+      "python-lists"
+    ]
+  },
+  {
+    "id": "python-conditions",
+    "title": "if / elif / else 條件判斷",
+    "language": "python",
+    "difficulty": "beginner",
+    "category": "control-flow",
+    "summary": "用縮排定義程式區塊，讓 Python 根據條件執行不同工作。",
+    "objectives": [
+      "撰寫條件分支",
+      "使用一致的四空格縮排",
+      "認識 and、or 與 not"
+    ],
+    "explanation": "if 條件: 後方以縮排表示區塊。elif 代表額外條件，else 處理其餘情況。第一個成立分支執行後便跳過剩餘分支。\n使用 == 比較相等；and、or、not 分別表示且、或、非。",
+    "examples": [
+      {
+        "title": "完整可執行範例",
+        "code": "score = 82\n\nif score >= 90:\n    print(\"Excellent\")\nelif score >= 60:\n    print(\"Pass\")\nelse:\n    print(\"Try again\")",
+        "output": "Pass"
+      }
+    ],
+    "notes": [
+      "條件後必須加冒號。",
+      "避免混用 Tab 與空格；本專案統一四空格縮排。",
+      "空串列、空字串與 0 在條件中視為 False。"
+    ],
+    "keywords": [
+      "if",
+      "elif",
+      "else",
+      "條件",
+      "縮排",
+      "and",
+      "or"
+    ],
+    "related": [
+      "python-variables",
+      "python-lists"
+    ]
+  },
+  {
+    "id": "python-lists",
+    "title": "list 串列操作",
+    "language": "python",
+    "difficulty": "beginner",
+    "category": "collections",
+    "summary": "以串列儲存多筆資料，練習索引、加入元素與走訪。",
+    "objectives": [
+      "建立並讀取串列",
+      "使用 append 與 len",
+      "透過迴圈走訪元素"
+    ],
+    "explanation": "list 使用中括號建立，可儲存多個元素，索引從 0 開始。append(value) 在尾端加入一個元素，len(items) 取得長度。\nitems[-1] 讀取最後一個元素；items[start:end] 切片包含 start 但不包含 end。for item in items 可逐一走訪元素。",
+    "examples": [
+      {
+        "title": "完整可執行範例",
+        "code": "languages = [\"C++\", \"Python\"]\nlanguages.append(\"JavaScript\")\n\nprint(languages[0])\nprint(len(languages))\nfor language in languages:\n    print(language)",
+        "output": "C++\n3\nC++\nPython\nJavaScript"
+      }
+    ],
+    "notes": [
+      "超出範圍的索引會引發 IndexError。",
+      "append 直接修改串列並回傳 None，不要把結果指定回原變數。",
+      "b = a 會讓兩個名稱指向同一串列；需要淺複本可用 a.copy()。"
+    ],
+    "keywords": [
+      "list",
+      "串列",
+      "append",
+      "len",
+      "索引",
+      "陣列"
+    ],
+    "related": [
+      "python-variables",
+      "python-conditions"
+    ]
+  },
+  {
+    "id": "javascript-variables",
+    "title": "let、const 與變數",
+    "language": "javascript",
+    "difficulty": "beginner",
+    "category": "basics",
+    "summary": "了解區塊作用域與重新指定值，選擇合適的變數宣告方式。",
+    "objectives": [
+      "以 const 宣告不重新指定的綁定",
+      "以 let 宣告會更新的值",
+      "認識字串與範本字面值"
+    ],
+    "explanation": "const 與 let 都具有區塊作用域。預設使用 const；當變數需要重新指定時才使用 let。\nconst 保護的是綁定，不代表物件內容不可修改。範本字面值使用反引號，透過 ${名稱} 插入值。",
+    "examples": [
+      {
+        "title": "完整可執行範例",
+        "code": "const name = \"Ada\";\nlet age = 20;\nage += 1;\nconst isLearning = true;\n\nconsole.log(`${name}: ${age}`);\nconsole.log(isLearning);",
+        "output": "Ada: 21\ntrue"
+      }
+    ],
+    "notes": [
+      "const 必須在宣告時初始化。",
+      "同一區塊內不可重複宣告同名 let 或 const。",
+      "避免使用 var，以減少函式作用域造成的混淆。"
+    ],
+    "keywords": [
+      "let",
+      "const",
+      "變數",
+      "作用域",
+      "template literal"
+    ],
+    "related": [
+      "javascript-conditions",
+      "javascript-arrays"
+    ]
+  },
+  {
+    "id": "javascript-conditions",
+    "title": "條件判斷",
+    "language": "javascript",
+    "difficulty": "beginner",
+    "category": "control-flow",
+    "summary": "用 if / else 控制流程，學會嚴格相等與布林條件。",
+    "objectives": [
+      "建立多分支判斷",
+      "使用 === 避免隱式型別轉換",
+      "以 && 與 || 組合條件"
+    ],
+    "explanation": "if (condition) { ... } 在條件為真時執行區塊；else if 接續其他條件，else 處理預設情況。\n通常使用 === 與 !== 做嚴格比較，以避免 == 的型別轉換。&& 代表且，|| 代表或，! 表示非。",
+    "examples": [
+      {
+        "title": "完整可執行範例",
+        "code": "const score = 82;\n\nif (score >= 90) {\n    console.log(\"Excellent\");\n} else if (score >= 60) {\n    console.log(\"Pass\");\n} else {\n    console.log(\"Try again\");\n}\nconsole.log(score === \"82\");",
+        "output": "Pass\nfalse"
+      }
+    ],
+    "notes": [
+      "空字串、0、null、undefined、NaN、false 都是 falsy 值。",
+      "空陣列 [] 與空物件 {} 是 truthy 值。",
+      "避免把指定運算 = 誤寫成比較運算。"
+    ],
+    "keywords": [
+      "if",
+      "else",
+      "條件",
+      "===",
+      "布林",
+      "邏輯"
+    ],
+    "related": [
+      "javascript-variables",
+      "javascript-arrays"
+    ]
+  },
+  {
+    "id": "javascript-arrays",
+    "title": "陣列與常用方法",
+    "language": "javascript",
+    "difficulty": "beginner",
+    "category": "collections",
+    "summary": "使用 map、filter 與 push 管理資料集合，認識方法是否改動原陣列。",
+    "objectives": [
+      "建立並加入陣列元素",
+      "以 map 轉換資料",
+      "以 filter 篩選資料"
+    ],
+    "explanation": "陣列使用中括號建立，索引從 0 開始。push(value) 加入元素並修改原陣列；length 可取得元素數量。\nmap(callback) 產生每個元素轉換後的新陣列；filter(callback) 保留回呼結果為 truthy 的元素，也回傳新陣列。join(separator) 將元素連接成字串。",
+    "examples": [
+      {
+        "title": "完整可執行範例",
+        "code": "const numbers = [1, 2, 3];\nnumbers.push(4);\nconst doubled = numbers.map(number => number * 2);\nconst even = numbers.filter(number => number % 2 === 0);\n\nconsole.log(numbers.length);\nconsole.log(doubled.join(\", \"));\nconsole.log(even.join(\", \"));",
+        "output": "4\n2, 4, 6, 8\n2, 4"
+      }
+    ],
+    "notes": [
+      "const 陣列仍可修改元素，只是不能重新指定綁定。",
+      "map 與 filter 回傳新陣列，但不會深複製內部物件。",
+      "forEach 不回傳轉換後的陣列；需要新陣列時使用 map。"
+    ],
+    "keywords": [
+      "陣列",
+      "array",
+      "map",
+      "filter",
+      "push",
+      "join"
+    ],
+    "related": [
+      "javascript-variables",
+      "javascript-conditions"
+    ]
+  },
+  {
+    "id": "cpp-functions",
+    "title": "函式基礎",
+    "language": "cpp",
+    "difficulty": "beginner",
+    "category": "functions",
+    "summary": "把重複工作封裝成函式，認識參數、回傳值與呼叫方式。",
+    "objectives": [
+      "定義具有參數及回傳值的函式",
+      "從 main 呼叫自訂函式",
+      "理解傳值參數的基本行為"
+    ],
+    "explanation": "函式將一段具名工作封裝起來，以減少重複程式碼。基本結構是「回傳型別 函式名稱(參數列表) { 函式內容 }」。\n下例的 add 接收兩個 int 參數，並用 return 回傳整數結果。定義放在 main 前面，讓編譯器在呼叫時已知道函式的宣告。傳值參數會建立值的複本。",
+    "examples": [
+      {
+        "title": "定義與呼叫加法函式",
+        "code": "#include <iostream>\n\nint add(int left, int right) {\n    return left + right;\n}\n\nint main() {\n    int result = add(3, 4);\n    std::cout << result << \"\\n\";\n    std::cout << add(10, 5) << \"\\n\";\n    return 0;\n}",
+        "output": "7\n15"
+      }
+    ],
+    "notes": [
+      "非 void 函式的正常執行路徑應回傳符合型別的值。",
+      "若函式定義放在 main 後面，需先提供函式宣告。",
+      "傳值參數的修改不會改變呼叫端原始變數；參考傳遞屬延伸主題。"
+    ],
+    "keywords": [
+      "函式",
+      "function",
+      "參數",
+      "return",
+      "回傳值",
+      "add"
+    ],
+    "related": [
+      "cpp-variables",
+      "cpp-conditions"
+    ]
+  }
+]

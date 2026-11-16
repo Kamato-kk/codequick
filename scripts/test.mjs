@@ -1,0 +1,22 @@
+import { fileURLToPath } from 'node:url';
+import assert from 'node:assert/strict';
+import { readFileSync, readdirSync } from 'node:fs';
+import { execFileSync } from 'node:child_process';
+import { root, readJSON, validateArticles } from './validate.mjs';
+import { filterArticles, getRelated, articleHref } from '../assets/js/content.js';
+const articles = validateArticles(readJSON('data/articles.json'));
+let checks = 0;
+function test(name, run) { run(); checks++; console.log(`PASS ${name}`); }
+test('九篇初始文章仍存在', () => { for (const id of ['cpp-variables','cpp-conditions','cpp-loops','python-variables','python-conditions','python-lists','javascript-variables','javascript-conditions','javascript-arrays']) assert(articles.some(a => a.id === id)); });
+test('標題搜尋', () => assert(filterArticles(articles, {query:'if / elif'}).some(a => a.id === 'python-conditions')));
+test('摘要搜尋', () => assert(filterArticles(articles, {query:'靜態型別'}).some(a => a.id === 'cpp-variables')));
+test('關鍵字及不分大小寫搜尋', () => assert(filterArticles(articles, {query:'  TEMPLATE LITERAL  '}).some(a => a.id === 'javascript-variables')));
+test('搜尋無結果', () => assert.equal(filterArticles(articles,{query:'不存在的語法xyz'}).length,0));
+test('語言與難度組合篩選', () => { for (const language of ['cpp','python','javascript']) { const matches = filterArticles(articles, {language,difficulty:'beginner'}); assert(matches.length >= 3); assert(matches.every(a => a.language === language && a.difficulty === 'beginner')); } assert.equal(filterArticles(articles,{difficulty:'intermediate'}).length,0); });
+test('所有文章搜尋與網址 round-trip', () => { for (const article of articles) { assert(filterArticles(articles, {query:article.title}).includes(article)); assert.equal(new URLSearchParams(articleHref(article.id).slice(1)).get('article'),article.id); } });
+test('相關推薦存在且不含自身／重複', () => { for (const article of articles) { const related=getRelated(articles,article); assert(related.length); assert(!related.includes(article)); assert.equal(new Set(related.map(a=>a.id)).size,related.length); } });
+test('驗證器拒絕錯誤資料', () => { const variants = [a => a.push(a[0]), a => delete a[0].title, a => a[0].language='ruby', a => a[0].related=['missing'], a => a[0].related=[a[0].id], a => a[0].extra=true, a => a[0].examples[0].code='', a => a[0].id='python-wrong']; for (const change of variants) { const copy=structuredClone(articles); change(copy); assert.throws(()=>validateArticles(copy)); } });
+test('JS 模組語法與安全 DOM', () => { for (const file of readdirSync(new URL('assets/js/',root))) { const url=new URL(`assets/js/${file}`,root); execFileSync(process.execPath,['--check',fileURLToPath(url)]); const source=readFileSync(url,'utf8'); assert(!/innerHTML|eval\(/.test(source)); } });
+test('靜態資源使用相對路徑且存在', () => { const html=readFileSync(new URL('index.html',root),'utf8'); const matches=[...html.matchAll(/(?:src|href)="(\.\/[^"#]+)"/g)]; assert(matches.length>=3); for(const match of matches) assert(readFileSync(new URL(match[1],root)).length); assert(!/(?:src|href)="\//.test(html)); });
+if (articles.some(a=>a.id==='cpp-functions')) test('函式擴充可搜尋與分類', () => { assert.equal(filterArticles(articles,{query:'函式',language:'cpp'}).length,1); assert(filterArticles(articles,{language:'cpp'}).some(a=>a.id==='cpp-functions')); });
+console.log(`完成 ${checks} 組測試；${articles.length} 篇文章。`);

@@ -1,0 +1,125 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CodeQuick article collection",
+  "type": "array",
+  "minItems": 1,
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "id",
+      "title",
+      "language",
+      "difficulty",
+      "category",
+      "summary",
+      "objectives",
+      "explanation",
+      "examples",
+      "notes",
+      "keywords",
+      "related"
+    ],
+    "properties": {
+      "id": {
+        "type": "string",
+        "pattern": "^(cpp|python|javascript)-[a-z0-9]+(-[a-z0-9]+)*$"
+      },
+      "title": {
+        "type": "string",
+        "minLength": 1
+      },
+      "language": {
+        "enum": [
+          "cpp",
+          "python",
+          "javascript"
+        ]
+      },
+      "difficulty": {
+        "enum": [
+          "beginner",
+          "intermediate"
+        ]
+      },
+      "category": {
+        "enum": [
+          "basics",
+          "control-flow",
+          "collections",
+          "functions"
+        ]
+      },
+      "summary": {
+        "type": "string",
+        "minLength": 1
+      },
+      "objectives": {
+        "type": "array",
+        "minItems": 1,
+        "uniqueItems": true,
+        "items": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "explanation": {
+        "type": "string",
+        "minLength": 1
+      },
+      "examples": {
+        "type": "array",
+        "minItems": 1,
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "title",
+            "code",
+            "output"
+          ],
+          "properties": {
+            "title": {
+              "type": "string",
+              "minLength": 1
+            },
+            "code": {
+              "type": "string",
+              "minLength": 1
+            },
+            "output": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "notes": {
+        "type": "array",
+        "minItems": 1,
+        "uniqueItems": true,
+        "items": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "keywords": {
+        "type": "array",
+        "minItems": 1,
+        "uniqueItems": true,
+        "items": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "related": {
+        "type": "array",
+        "minItems": 0,
+        "uniqueItems": true,
+        "items": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

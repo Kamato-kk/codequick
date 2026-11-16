@@ -1,0 +1,1 @@
+﻿{"private":true,"type":"module","scripts":{"test":"node scripts/validate.mjs && node scripts/test.mjs","examples":"python scripts/check-examples.py","start":"python scripts/serve.py"}}
